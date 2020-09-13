@@ -1,5 +1,6 @@
 import React from "react";
-import TableContent from "./TableContent/TableContent";
+import TableContent from "./TableContent/TableContent"; 
+import OnRowSelectInfo from "../OnRowSelectInfo/OnRowSelectInfo";
 
 class Table extends React.Component {
   constructor(props) {
@@ -11,8 +12,13 @@ class Table extends React.Component {
       directionSymbol: {
         symbol: "asc",
       },
+      row: null,
     };
   }
+
+  onRowSelect = (row) => {
+    this.setState({ row });
+  };
 
   onSortHandler = (sortColumn) => {
     const cloneData = this.state.data.concat();
@@ -48,7 +54,10 @@ class Table extends React.Component {
           onSort={this.onSortHandler}
           sortSymbol={this.state.sort}
           sortField={this.state.sortColumn}
+          onRowSelect={this.onRowSelect}
         />
+
+        {this.state.row ? <OnRowSelectInfo row={this.state.row} /> : null}
       </div>
     );
   }
