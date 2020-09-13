@@ -12,6 +12,10 @@ class App extends React.Component {
       isButtonSelected: false,
       data: [],
       isLoading: false,
+      totalRowsCount: 0,
+      pageSize: 50,
+      currentPage: 1,
+
     };
   }
 
@@ -22,6 +26,7 @@ class App extends React.Component {
     this.setState({
       isLoading: false,
       data,
+      totalRowsCount: data.length
     });
   }
 
@@ -45,7 +50,12 @@ class App extends React.Component {
           this.state.isLoading ? (
             <Loading />
           ) : (
-            <MainContent data={this.state.data} />
+            <MainContent
+              data={this.state.data}
+              totalRowsCount={this.state.totalRowsCount}
+              pageSize={this.state.pageSize}
+              currentPage={this.state.currentPage}
+            />
           )
         ) : (
           <div className="startPage"></div>

@@ -1,5 +1,6 @@
 import React from "react";
-import TableContent from "./TableContent/TableContent"; 
+import "./Table.css";
+import TableContent from "./TableContent/TableContent";
 import OnRowSelectInfo from "../OnRowSelectInfo/OnRowSelectInfo";
 
 class Table extends React.Component {
@@ -7,6 +8,9 @@ class Table extends React.Component {
     super(props);
     this.state = {
       data: this.props.data,
+      currentPage: this.props.currentPage,
+      pageSize:this.props.pageSize,
+
       sortColumn: "",
       sort: "asc",
       directionSymbol: {
@@ -14,6 +18,7 @@ class Table extends React.Component {
       },
       row: null,
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   onRowSelect = (row) => {
@@ -46,17 +51,57 @@ class Table extends React.Component {
     });
   };
 
+  handleClick = (e) => {
+    let newCurrentPage = Number(e.target.innerHTML) ;
+    this.setState({ currentPage: newCurrentPage });
+  };
+
   render() {
+    const { data, currentPage, pageSize } = this.state;
+
+    
+    const indexOfLastData = currentPage * pageSize;
+    const indexOfFirstData = indexOfLastData - pageSize;
+    const currentData = data.slice(indexOfFirstData, indexOfLastData); //делаем пагинацию 
+
+
+
+    let numberOfPages = Math.ceil(
+      this.props.totalRowsCount / this.props.pageSize
+    );
+
+    let pages = [];
+    for (let i = 1; i <= numberOfPages; i++) {
+      pages.push(i);
+    }
+
     return (
       <div>
+       
         <TableContent
-          data={this.state.data}
+          data={currentData}
           onSort={this.onSortHandler}
           sortSymbol={this.state.sort}
           sortField={this.state.sortColumn}
           onRowSelect={this.onRowSelect}
         />
-
+ <div className="paginator">
+          {numberOfPages > 1
+            ? pages.map((n) => (
+                <span
+                  key={n}
+                  className={
+                    this.state.currentPage === n
+                      ? "selectedPage"
+                      : "notSelectedPage"
+                  }
+                  onClick={this.handleClick}
+                >
+                  {n}{" "}
+                </span>
+              ))
+            : null}
+        </div>
         {this.state.row ? <OnRowSelectInfo row={this.state.row} /> : null}
       </div>
     );

@@ -6,7 +6,12 @@ class MainContent extends React.Component {
   render() {
     return (
       <div className="mainContent">
-       <Table  data={this.props.data}/>
+        <Table
+          data={this.props.data}
+          totalRowsCount={this.props.totalRowsCount}
+          pageSize={this.props.pageSize}
+          currentPage={this.props.currentPage}
+        />
       </div>
     );
   }

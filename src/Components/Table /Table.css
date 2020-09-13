@@ -1,0 +1,15 @@
+.selectedPage {
+    font-weight: bold;
+    color:#f89eec;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.notSelectedPage {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.paginator {
+    padding: 50px;
+}
