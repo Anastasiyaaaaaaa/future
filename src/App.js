@@ -12,22 +12,31 @@ class App extends React.Component {
       isButtonSelected: false,
       data: [],
       isLoading: false,
+      error: null,
       totalRowsCount: 0,
       pageSize: 50,
       currentPage: 1,
-
     };
   }
 
   async fetchData(url) {
-    /*делаем запрос*/
-    const response = await fetch(url);
-    const data = await response.json();
-    this.setState({
-      isLoading: false,
-      data,
-      totalRowsCount: data.length
-    });
+    fetch(url)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          this.setState({
+            isLoading: false,
+            data: result,
+            totalRowsCount: result.length,
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoading: true,
+            error,
+          });
+        }
+      );
   }
 
   SelectionButtonsHandler = (url) => {
@@ -41,27 +50,30 @@ class App extends React.Component {
   };
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <SelectionButtons onSelect={this.SelectionButtonsHandler} />
-        </header>
-        {this.state.isButtonSelected ? (
-          this.state.isLoading ? (
-            <Loading />
+    if (this.state.error) {
+      return <p> Произошла ошибка во время загрузки данных :(  </p>;
+    } else
+      return (
+        <div className="App">
+          <header className="App-header">
+            <SelectionButtons onSelect={this.SelectionButtonsHandler} />
+          </header>
+          {this.state.isButtonSelected ? (
+            this.state.isLoading ? (
+              <Loading />
+            ) : (
+              <MainContent
+                data={this.state.data}
+                totalRowsCount={this.state.totalRowsCount}
+                pageSize={this.state.pageSize}
+                currentPage={this.state.currentPage}
+              />
+            )
           ) : (
-            <MainContent
-              data={this.state.data}
-              totalRowsCount={this.state.totalRowsCount}
-              pageSize={this.state.pageSize}
-              currentPage={this.state.currentPage}
-            />
-          )
-        ) : (
-          <div className="startPage"></div>
-        )}
-      </div>
-    );
+            <div className="startPage"></div>
+          )}
+        </div>
+      );
   }
 }
 
