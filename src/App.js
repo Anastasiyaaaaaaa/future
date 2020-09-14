@@ -23,7 +23,7 @@ class App extends React.Component {
     const response = await fetch(url, {
       method: "GET",
       headers: {
-        "Access-Control-Allow-Origin": "*"
+        "Content-Type": "text/plain;charset=UTF-8",
       },
     });
     const data = await response.json();
