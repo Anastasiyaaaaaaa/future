@@ -15,22 +15,18 @@ class App extends React.Component {
       totalRowsCount: 0,
       pageSize: 50,
       currentPage: 1,
+
     };
   }
 
   async fetchData(url) {
     /*делаем запрос*/
-    const response = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "text/plain;charset=UTF-8",
-      },
-    });
+    const response = await fetch(url);
     const data = await response.json();
     this.setState({
       isLoading: false,
       data,
-      totalRowsCount: data.length,
+      totalRowsCount: data.length
     });
   }
 

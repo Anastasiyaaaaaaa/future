@@ -11,8 +11,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-paginate": "^6.5.0",
-    "react-scripts": "3.4.3",
-    "whatwg-fetch": "^3.4.1"
+    "react-scripts": "3.4.3"
   },
   "scripts": {
     "start": "set HTTPS=true&&react-scripts start",
