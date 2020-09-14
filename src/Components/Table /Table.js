@@ -8,23 +8,32 @@ class Table extends React.Component {
     super(props);
     this.state = {
       data: this.props.data,
-      currentPage: this.props.currentPage,
-      pageSize:this.props.pageSize,
 
+      /* пагинация */
+      currentPage: this.props.currentPage,
+      pageSize: this.props.pageSize,
+
+      /* сортировка */
       sortColumn: "",
       sort: "asc",
       directionSymbol: {
         symbol: "asc",
       },
+
+      /* выбранная строка */
       row: null,
     };
+
     this.handleClick = this.handleClick.bind(this);
   }
 
+
+   /* выбранная строка */
   onRowSelect = (row) => {
     this.setState({ row });
   };
 
+  /* сортировка */
   onSortHandler = (sortColumn) => {
     const cloneData = this.state.data.concat();
     const sortType = this.state.sort === "asc" ? "desc" : "asc";
@@ -51,20 +60,18 @@ class Table extends React.Component {
     });
   };
 
+/* пагинация */
   handleClick = (e) => {
-    let newCurrentPage = Number(e.target.innerHTML) ;
+    let newCurrentPage = Number(e.target.innerHTML);
     this.setState({ currentPage: newCurrentPage });
   };
 
   render() {
     const { data, currentPage, pageSize } = this.state;
 
-    
     const indexOfLastData = currentPage * pageSize;
     const indexOfFirstData = indexOfLastData - pageSize;
-    const currentData = data.slice(indexOfFirstData, indexOfLastData); //делаем пагинацию 
-
-
+    const currentData = data.slice(indexOfFirstData, indexOfLastData); //отображаем только 50 строк
 
     let numberOfPages = Math.ceil(
       this.props.totalRowsCount / this.props.pageSize
@@ -77,7 +84,6 @@ class Table extends React.Component {
 
     return (
       <div>
-       
         <TableContent
           data={currentData}
           onSort={this.onSortHandler}
@@ -85,7 +91,8 @@ class Table extends React.Component {
           sortField={this.state.sortColumn}
           onRowSelect={this.onRowSelect}
         />
- <div className="paginator">
+        
+        <div className="paginator">
           {numberOfPages > 1
             ? pages.map((n) => (
                 <span
