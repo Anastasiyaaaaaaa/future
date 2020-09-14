@@ -1,6 +1,6 @@
 import React from "react";
 import "./MainContent.css";
-import Table from "../Table /Table";
+import Table from "./Table /Table";
 
 class MainContent extends React.Component {
   render() {

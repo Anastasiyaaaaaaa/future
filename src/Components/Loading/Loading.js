@@ -6,6 +6,6 @@ export default () => (
     <div className="lds-heart">
       <div></div>
     </div>
-    <div className="LoaderText">Loading data...</div>
+    <div className="LoaderText">Загрузка данных...</div>
   </div>
 );

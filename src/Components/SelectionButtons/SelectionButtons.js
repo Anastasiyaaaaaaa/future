@@ -12,13 +12,13 @@ export default (props) => {
           onClick={() => props.onSelect(smallUrl)}
           className="btn btn-outline-warning"
         >
-          Small Table
+          Маленькая таблица
         </button>
         <button
           onClick={() => props.onSelect(bigUrl)}
           className="btn btn-outline-info"
         >
-          Big Table
+           Большая таблица
         </button>
       </div>
     </div>

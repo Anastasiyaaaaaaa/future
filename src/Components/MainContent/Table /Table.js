@@ -1,7 +1,9 @@
 import React from "react";
 import "./Table.css";
 import TableContent from "./TableContent/TableContent";
-import OnRowSelectInfo from "../OnRowSelectInfo/OnRowSelectInfo";
+import OnRowSelectInfo from "./OnRowSelectInfo/OnRowSelectInfo";
+import TableFilter from "./TableFilter/TableFilter";
+import AddTableRow from "./AddTableRow/AddTableRow";
 
 class Table extends React.Component {
   constructor(props) {
@@ -22,13 +24,15 @@ class Table extends React.Component {
 
       /* выбранная строка */
       row: null,
+
+      /* поиск */
+      search: "",
     };
 
     this.handleClick = this.handleClick.bind(this);
   }
 
-
-   /* выбранная строка */
+  /* выбранная строка */
   onRowSelect = (row) => {
     this.setState({ row });
   };
@@ -60,22 +64,39 @@ class Table extends React.Component {
     });
   };
 
-/* пагинация */
+  /* пагинация */
   handleClick = (e) => {
     let newCurrentPage = Number(e.target.innerHTML);
     this.setState({ currentPage: newCurrentPage });
   };
 
+  /* фильтрация */
+  searchHandler = (search) => this.setState({ search, currentPage: 1 });
+  getFilteredData() {
+    const { data, search } = this.state;
+    const cloneData = data.concat();
+    if (!search) {
+      return cloneData;
+    }
+    return cloneData.filter((item) => {
+      return (
+        item["firstName"].toLowerCase().includes(search.toLowerCase()) ||
+        item["lastName"].toLowerCase().includes(search.toLowerCase()) ||
+        item["email"].toLowerCase().includes(search.toLowerCase())
+      );
+    });
+  }
+
   render() {
-    const { data, currentPage, pageSize } = this.state;
+    const { currentPage, pageSize } = this.state;
 
     const indexOfLastData = currentPage * pageSize;
     const indexOfFirstData = indexOfLastData - pageSize;
-    const currentData = data.slice(indexOfFirstData, indexOfLastData); //отображаем только 50 строк
+    const filteredData = this.getFilteredData();
 
-    let numberOfPages = Math.ceil(
-      this.props.totalRowsCount / this.props.pageSize
-    );
+    let numberOfPages = Math.ceil(filteredData.length / pageSize);
+
+    const currentData = filteredData.slice(indexOfFirstData, indexOfLastData); //отображаем только 50 строк
 
     let pages = [];
     for (let i = 1; i <= numberOfPages; i++) {
@@ -84,14 +105,27 @@ class Table extends React.Component {
 
     return (
       <div>
-        <TableContent
-          data={currentData}
-          onSort={this.onSortHandler}
-          sortSymbol={this.state.sort}
-          sortField={this.state.sortColumn}
-          onRowSelect={this.onRowSelect}
-        />
-        
+        <div className="topFunctions">
+          <TableFilter onSearch={this.searchHandler} />
+          
+          <AddTableRow data={this.state.data}/>
+        </div>
+
+        {currentData.length === 0 ? (
+          <div className="noSearchResults">
+            {" "}
+            Ничего не найдено. <br /> Введите новый текст для поиска или удалите предыдущий :){" "}
+          </div>
+        ) : (
+          <TableContent
+            data={currentData}
+            onSort={this.onSortHandler}
+            sortSymbol={this.state.sort}
+            sortField={this.state.sortColumn}
+            onRowSelect={this.onRowSelect}
+          />
+        )}
+
         <div className="paginator">
           {numberOfPages > 1
             ? pages.map((n) => (
@@ -109,7 +143,11 @@ class Table extends React.Component {
               ))
             : null}
         </div>
-        {this.state.row ? <OnRowSelectInfo row={this.state.row} /> : null}
+        {this.state.row ? (
+          currentData.length !== 0 ? (
+            <OnRowSelectInfo row={this.state.row} />
+          ) : null
+        ) : null}
       </div>
     );
   }

@@ -13,21 +13,25 @@ class App extends React.Component {
       data: [],
       isLoading: false,
       error: null,
-      totalRowsCount: 0,
+
       pageSize: 50,
       currentPage: 1,
     };
   }
 
   async fetchData(url) {
-    fetch(url)
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .then(
         (result) => {
           this.setState({
             isLoading: false,
             data: result,
-            totalRowsCount: result.length,
           });
         },
         (error) => {
@@ -45,35 +49,37 @@ class App extends React.Component {
     this.setState({
       isButtonSelected: true,
       isLoading: true,
+      error: false
     });
     this.fetchData(url);
   };
 
   render() {
-    if (this.state.error) {
-      return <p> Произошла ошибка во время загрузки данных :(  </p>;
-    } else
-      return (
-        <div className="App">
-          <header className="App-header">
-            <SelectionButtons onSelect={this.SelectionButtonsHandler} />
-          </header>
-          {this.state.isButtonSelected ? (
-            this.state.isLoading ? (
-              <Loading />
-            ) : (
-              <MainContent
-                data={this.state.data}
-                totalRowsCount={this.state.totalRowsCount}
-                pageSize={this.state.pageSize}
-                currentPage={this.state.currentPage}
-              />
-            )
+    // if (this.state.error) {
+    //   return <p> Произошла ошибка во время загрузки данных :(  </p>;
+    // } else
+    return (
+      <div className="App">
+        <header className="App-header">
+          <SelectionButtons onSelect={this.SelectionButtonsHandler} />
+        </header>
+        {this.state.isButtonSelected ? (
+          this.state.error ? (
+            <p> Произошла ошибка во время загрузки данных :( </p>
+          ) : this.state.isLoading ? (
+            <Loading />
           ) : (
-            <div className="startPage"></div>
-          )}
-        </div>
-      );
+            <MainContent
+              data={this.state.data}
+              pageSize={this.state.pageSize}
+              currentPage={this.state.currentPage}
+            />
+          )
+        ) : (
+          <div className="startPage"></div>
+        )}
+      </div>
+    );
   }
 }
 
