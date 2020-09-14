@@ -20,7 +20,10 @@ class App extends React.Component {
 
   async fetchData(url) {
     /*делаем запрос*/
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      method: "GET",
+     
+    });
     const data = await response.json();
     this.setState({
       isLoading: false,
