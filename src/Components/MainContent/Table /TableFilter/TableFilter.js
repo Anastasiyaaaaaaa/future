@@ -19,6 +19,7 @@ export default (props) => {
         </div>
         <input
           type="text"
+          placeholder="Введите текст для поиска"
           className="form-control"
           onChange={valueChangeHandler}
           value={value}
