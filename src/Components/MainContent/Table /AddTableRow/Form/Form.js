@@ -104,6 +104,7 @@ class Form extends React.Component {
                   required
                   name="id"
                   type="id"
+                  pattern="^[ 0-9]+$"
                   value={this.state.id}
                   onChange={this.handleChange}
                 />
@@ -114,6 +115,7 @@ class Form extends React.Component {
                   required
                   name="firstName"
                   type="text"
+                  pattern="^[a-zA-Z]+$"
                   value={this.state.firstName}
                   onChange={this.handleChange}
                 />
@@ -124,6 +126,7 @@ class Form extends React.Component {
                   required
                   name="lastName"
                   type="text"
+                  pattern="^[a-zA-Z]+$"
                   value={this.state.lastName}
                   onChange={this.handleChange}
                 />
@@ -144,6 +147,8 @@ class Form extends React.Component {
                   required
                   name="phone"
                   type="tel"
+                  placeholder="(888)888-8888" 
+                  pattern="\([0-9]{3}\)[0-9]{3}-[0-9]{4}"
                   value={this.state.phone}
                   onChange={this.handleChange}
                 />
