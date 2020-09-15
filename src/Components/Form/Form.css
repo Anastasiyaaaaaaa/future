@@ -7,8 +7,9 @@
     padding: 5px 50px 30px 50px;
     background: white;
     text-align: left;
-    border: solid #ffd3f9;
-    background: #ffedfd;
+    border: solid #c7c7c7;
+    background: #f0f0f0;
+    border-radius: 10px;
  }
 
  .headerButton {

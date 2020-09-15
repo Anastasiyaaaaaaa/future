@@ -12,7 +12,7 @@ export default (props) => {
       <div className="input-group ">
         <div className="input-group-prepend">
           <button
-            className="btn btn-outline-secondary"
+            className="btn btn-secondary"
             onClick={() => props.onSearch(value)}
           >
             Найти
