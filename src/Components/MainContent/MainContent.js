@@ -8,7 +8,6 @@ class MainContent extends React.Component {
       <div className="mainContent">
         <Table
           data={this.props.data}
-          totalRowsCount={this.props.totalRowsCount}
           pageSize={this.props.pageSize}
           currentPage={this.props.currentPage}
         />

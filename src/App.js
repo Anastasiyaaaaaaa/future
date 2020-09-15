@@ -1,19 +1,26 @@
 import React from "react";
 import "./App.css";
 import SelectionButtons from "./Components/SelectionButtons/SelectionButtons";
-import MainContent from "./Components/MainContent/MainContent";
 import Loading from "./Components/Loading/Loading";
+import Table from "./Components/MainContent/Table /Table";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isButtonSelected: false,
       data: [],
-      isLoading: false,
+
+      /* ошибка при запросе на сервер */
       error: null,
 
+      /* кнопки выбора набора данных*/
+      isButtonSelected: false,
+
+      /* индикатор загрузки */
+      isLoading: false,
+
+      /* пагинация */
       pageSize: 50,
       currentPage: 1,
     };
@@ -49,15 +56,12 @@ class App extends React.Component {
     this.setState({
       isButtonSelected: true,
       isLoading: true,
-      error: false
+      error: false,
     });
     this.fetchData(url);
   };
 
   render() {
-    // if (this.state.error) {
-    //   return <p> Произошла ошибка во время загрузки данных :(  </p>;
-    // } else
     return (
       <div className="App">
         <header className="App-header">
@@ -69,11 +73,14 @@ class App extends React.Component {
           ) : this.state.isLoading ? (
             <Loading />
           ) : (
-            <MainContent
+            <div className="mainContent">
+              
+            <Table
               data={this.state.data}
               pageSize={this.state.pageSize}
               currentPage={this.state.currentPage}
             />
+            </div>
           )
         ) : (
           <div className="startPage"></div>
