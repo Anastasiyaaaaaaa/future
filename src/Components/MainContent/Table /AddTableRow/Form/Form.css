@@ -1,1 +1,26 @@
- 
+ .tableForm {
+    right: 10%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    padding: 5px 50px 30px 50px;
+    background: white;
+    text-align: left;
+    border: solid #ffd3f9;
+ }
+
+ .headerButton {
+    right: 15px;
+    position: absolute;
+ }
+
+ .formHeaderlabel {
+    margin-top: 30px;
+    font-weight: bold;
+ }
+
+
+ .form-group {
+    margin-bottom: 10%;
+}

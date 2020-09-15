@@ -96,11 +96,22 @@ class Form extends React.Component {
           </button>
         ) : (
           <div>
-            <form className="card mx-xl-5" onSubmit={this.handleSubmit}>
-              <label>Введите данные: </label>
-              <label>
+            <form onSubmit={this.handleSubmit} className="tableForm">
+              <div className="headerButton">
+                <button
+                className="btn navbar-toggle"
+                onClick={this.handleClickCancel}
+              >
+                x
+              </button>
+              </div>
+              
+              <label className="formHeaderlabel">Введите данные: </label>
+
+              <label className="col-form-label-sm">
                 id:
                 <input
+                  className="form-control"
                   required
                   name="id"
                   type="id"
@@ -110,21 +121,25 @@ class Form extends React.Component {
                   onChange={this.handleChange}
                 />
               </label>
-              <label>
+
+              <label className="col-form-label-sm">
                 firstName:
                 <input
+                  className="form-control"
                   required
                   name="firstName"
                   type="text"
-                  pattern="^[a-zA-Z]+$" 
+                  pattern="^[a-zA-Z]+$"
                   placeholder="Louis"
                   value={this.state.firstName}
                   onChange={this.handleChange}
                 />
               </label>
-              <label>
+
+              <label className="col-form-label-sm">
                 lastName:
                 <input
+                  className="form-control"
                   required
                   name="lastName"
                   type="text"
@@ -134,9 +149,11 @@ class Form extends React.Component {
                   onChange={this.handleChange}
                 />
               </label>
-              <label>
+
+              <label className="col-form-label-sm">
                 email:
                 <input
+                  className="form-control"
                   required
                   name="email"
                   type="email"
@@ -145,27 +162,27 @@ class Form extends React.Component {
                   onChange={this.handleChange}
                 />
               </label>
-              <label>
+
+              <label className="col-form-label-sm">
                 phone:
                 <input
+                  className="form-control"
                   required
                   name="phone"
                   type="tel"
-                  placeholder="(888)888-8888" 
+                  placeholder="(888)888-8888"
                   pattern="\([0-9]{3}\)[0-9]{3}-[0-9]{4}"
                   value={this.state.phone}
                   onChange={this.handleChange}
                 />
               </label>
+        <br />
               <input
                 disabled={this.isDisabled()}
                 type="submit"
                 value="Добавить в таблицу"
                 className="btn btn-outline-success"
               />
-              <button onClick={this.handleClickCancel} className="btn btn-info">
-                Oтмена
-              </button>
             </form>
           </div>
         )}
