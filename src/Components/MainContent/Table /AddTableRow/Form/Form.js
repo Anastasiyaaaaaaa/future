@@ -105,6 +105,7 @@ class Form extends React.Component {
                   name="id"
                   type="id"
                   pattern="^[ 0-9]+$"
+                  placeholder="12"
                   value={this.state.id}
                   onChange={this.handleChange}
                 />
@@ -115,7 +116,8 @@ class Form extends React.Component {
                   required
                   name="firstName"
                   type="text"
-                  pattern="^[a-zA-Z]+$"
+                  pattern="^[a-zA-Z]+$" 
+                  placeholder="Louis"
                   value={this.state.firstName}
                   onChange={this.handleChange}
                 />
@@ -127,6 +129,7 @@ class Form extends React.Component {
                   name="lastName"
                   type="text"
                   pattern="^[a-zA-Z]+$"
+                  placeholder="Gunter"
                   value={this.state.lastName}
                   onChange={this.handleChange}
                 />
@@ -137,6 +140,7 @@ class Form extends React.Component {
                   required
                   name="email"
                   type="email"
+                  placeholder="example@mail.com"
                   value={this.state.email}
                   onChange={this.handleChange}
                 />
