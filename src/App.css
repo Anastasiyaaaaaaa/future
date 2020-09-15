@@ -2,8 +2,14 @@
   text-align: center;
   max-width: 80%;
   margin: 0 auto;
- 
-}
+ }
 
+ .noSearchResults {
+  padding: 30px;
+}
  
- 
+ .topFunctions {
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 20px;
+ }

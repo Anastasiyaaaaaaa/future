@@ -13,12 +13,3 @@
 .paginator {
     padding: 50px;
 }
-
-.noSearchResults {
-    padding: 30px;
-}
-
-.topFunctions {
-    display: flex;
-    justify-content: space-between;
-}

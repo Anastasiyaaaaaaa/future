@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import "./TableFilter.css";
+
 export default (props) => {
   const [value, setValue] = useState("");
+  
   const valueChangeHandler = (event) => {
     setValue(event.target.value);
   };
