@@ -113,9 +113,7 @@ class Table extends React.Component {
     return (
       <div>
         <div className="topFunctions">
-          <TableFilter onSearch={this.searchHandler} />
-          {/* в форме сделать проверку, что такой юзер уже есть */}
-          
+          <TableFilter onSearch={this.searchHandler} />          
           <Form addRow={this.addedRow} />
         </div>
 

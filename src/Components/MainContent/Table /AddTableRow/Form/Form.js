@@ -1,4 +1,5 @@
 import React from "react";
+import "./Form.css";
 
 class Form extends React.Component {
   constructor(props) {
@@ -59,11 +60,21 @@ class Form extends React.Component {
   handleClick = () => {
     this.setState({ onButtonClick: true });
   };
+  handleClickCancel = () => {
+    this.setState({
+      onButtonClick: false,
+      id: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+    });
+  };
 
   isDisabled() {
     const { id, firstName, lastName, email, phone } = this.state;
-    
-/* нужно добавить проверку на уже существующий key */
+
+    /* нужно добавить проверку на уже существующий key */
 
     if (
       id === "" ||
@@ -84,61 +95,70 @@ class Form extends React.Component {
             Добавить запись
           </button>
         ) : (
-          <form className="card mx-xl-5" onSubmit={this.handleSubmit}>
-            <label>Введите данные: </label>
-            <label>
-              id:
+          <div>
+            <form className="card mx-xl-5" onSubmit={this.handleSubmit}>
+              <label>Введите данные: </label>
+              <label>
+                id:
+                <input
+                  required
+                  name="id"
+                  type="id"
+                  value={this.state.id}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label>
+                firstName:
+                <input
+                  required
+                  name="firstName"
+                  type="text"
+                  value={this.state.firstName}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label>
+                lastName:
+                <input
+                  required
+                  name="lastName"
+                  type="text"
+                  value={this.state.lastName}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label>
+                email:
+                <input
+                  required
+                  name="email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
+                />
+              </label>
+              <label>
+                phone:
+                <input
+                  required
+                  name="phone"
+                  type="tel"
+                  value={this.state.phone}
+                  onChange={this.handleChange}
+                />
+              </label>
               <input
-                name="id"
-                type="id"
-                value={this.state.id}
-                onChange={this.handleChange}
+                disabled={this.isDisabled()}
+                type="submit"
+                value="Добавить в таблицу"
+                className="btn btn-outline-success"
               />
-            </label>
-            <label>
-              firstName:
-              <input
-                name="firstName"
-                type="text"
-                value={this.state.firstName}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              lastName:
-              <input
-                name="lastName"
-                type="text"
-                value={this.state.lastName}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              email:
-              <input
-                name="email"
-                type="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-              />
-            </label>
-            <label>
-              phone:
-              <input
-                name="phone"
-                type="tel"
-                value={this.state.phone}
-                onChange={this.handleChange}
-              />
-            </label>
-            {}
-            <input
-              disabled={this.isDisabled()}
-              type="submit"
-              value="Отправить"
-              className="btn btn-outline-success"
-            />
-          </form>
+              <button onClick={this.handleClickCancel} className="btn btn-info">
+                Oтмена
+              </button>
+            </form>
+          </div>
         )}
       </div>
     );

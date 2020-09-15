@@ -20,4 +20,5 @@
 
 .topFunctions {
     display: flex;
+    justify-content: space-between;
 }
