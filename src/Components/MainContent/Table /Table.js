@@ -2,8 +2,8 @@ import React from "react";
 import "./Table.css";
 import TableContent from "./TableContent/TableContent";
 import OnRowSelectInfo from "./OnRowSelectInfo/OnRowSelectInfo";
-import TableFilter from "./TableFilter/TableFilter";
-import AddTableRow from "./AddTableRow/AddTableRow";
+import TableFilter from "./TableFilter/TableFilter"; 
+import Form from "./AddTableRow/Form/Form";
 
 class Table extends React.Component {
   constructor(props) {
@@ -87,6 +87,13 @@ class Table extends React.Component {
     });
   }
 
+  /* добавление строки */
+  addedRow = (newRow) => {
+    const data = this.state.data.concat();
+    data.unshift(newRow);
+    this.setState({ data });
+  };
+
   render() {
     const { currentPage, pageSize } = this.state;
 
@@ -107,14 +114,16 @@ class Table extends React.Component {
       <div>
         <div className="topFunctions">
           <TableFilter onSearch={this.searchHandler} />
+          {/* в форме сделать проверку, что такой юзер уже есть */}
           
-          <AddTableRow data={this.state.data}/>
+          <Form addRow={this.addedRow} />
         </div>
 
         {currentData.length === 0 ? (
           <div className="noSearchResults">
             {" "}
-            Ничего не найдено. <br /> Введите новый текст для поиска или удалите предыдущий :){" "}
+            Ничего не найдено. <br /> Введите новый текст для поиска или удалите
+            предыдущий :){" "}
           </div>
         ) : (
           <TableContent
