@@ -99,13 +99,13 @@ class Form extends React.Component {
             <form onSubmit={this.handleSubmit} className="tableForm">
               <div className="headerButton">
                 <button
-                className="btn navbar-toggle"
-                onClick={this.handleClickCancel}
-              >
-                x
-              </button>
+                  className="btn navbar-toggle"
+                  onClick={this.handleClickCancel}
+                >
+                  x
+                </button>
               </div>
-              
+
               <label className="formHeaderlabel">Введите данные: </label>
 
               <label className="col-form-label-sm">
@@ -115,7 +115,7 @@ class Form extends React.Component {
                   required
                   name="id"
                   type="id"
-                  pattern="^[ 0-9]+$"
+                  pattern="^[0-9]+$"
                   placeholder="12"
                   value={this.state.id}
                   onChange={this.handleChange}
@@ -176,7 +176,7 @@ class Form extends React.Component {
                   onChange={this.handleChange}
                 />
               </label>
-        <br />
+              <br />
               <input
                 disabled={this.isDisabled()}
                 type="submit"

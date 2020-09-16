@@ -75,7 +75,7 @@ class App extends React.Component {
   getFilteredData() {
     const { data, search } = this.state;
     const cloneData = data.concat();
-    if (!search)  {
+    if (!search) {
       return cloneData;
     }
     return cloneData.filter((item) => {
@@ -176,7 +176,6 @@ class App extends React.Component {
                 <Form addRow={this.addedRow} />
               </div>
               {currentData.length === 0 ? (
-               
                 <div className="noSearchResults">
                   {" "}
                   Ничего не найдено. <br /> Введите новый текст для поиска или
