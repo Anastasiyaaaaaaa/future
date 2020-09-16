@@ -181,7 +181,7 @@ class Form extends React.Component {
                 disabled={this.isDisabled()}
                 type="submit"
                 value="Добавить в таблицу"
-                className="btn btn-outline-success"
+                className="btn btn-success"
               />
             </form>
           </div>
